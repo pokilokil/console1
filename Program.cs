@@ -50,30 +50,56 @@ class Program
         Console.WriteLine(m);
 
         //Урок 5 Ввод данных в консоль
-        
-        
+
+
         string l = "Назови свое имя";
-        Console.WriteLine(l); 
+        Console.WriteLine(l);
         string k;
         k = Console.ReadLine();
-        Console.WriteLine("Привет, "+ k + ", введи число 1");
+        Console.WriteLine("Привет, " + k + ", введи число 1");
 
         //Урок 6. Класс Convert.
 
         string j;
         //Как консоль видит "p" и "r"?
         int p, r;
+        float ss=0;
         j = Console.ReadLine();
         p = Convert.ToInt32(j);
         Console.WriteLine("А теперь число 2");
-        j = Console.ReadLine(); 
+        j = Console.ReadLine();
         r = Convert.ToInt32(j);
-        int s = p + r;
-        Console.WriteLine("Итак, " + k + ", получившееся число = " + s);
+
+        Console.WriteLine("Ввди операцию +,-,*,/ над числами");
+        j = Console.ReadLine();
+        if (j == "+")
+        {
+            ss = calcAdd(p, r);
+        }
+        if (j == "-")
+        {
+            ss = calcAdd(p, -r);
+        }
+        if (j == "*")
+        {
+            ss = calcMultiply(p, r);
+        }
+        if (j == "/")
+        {
+            ss = calcDiff(p, r);
+            if (ss==float.PositiveInfinity || ss==float.NegativeInfinity) 
+            {
+                Console.WriteLine("делили на ноль!");
+            }
+        }
+        //вызов функций - сложение, умножение, вычитание, деление
+        Console.WriteLine("Итак, " + k + ", результат = " + ss);
+
+
 
         //Урок 7. Класс Parse.
-
-        string t = "6";
+        Console.WriteLine("А теперь число TRY");
+        string t = Console.ReadLine();
 
         //Метод try catch
         try
@@ -81,9 +107,10 @@ class Program
             int u = int.Parse(t);
             Console.WriteLine("Успех");
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            Console.WriteLine("Неудача");
+            //обработка исключения - записать файл, сообщить пользоователю, отправить инфу сисадмину
+            Console.WriteLine("Неудача " + ex.Message);
         }
         //Метод if else
         //Старался сделать по-своему, 
@@ -92,7 +119,7 @@ class Program
         Console.WriteLine("Введи целое число");
         v = Console.ReadLine();
         bool x = int.TryParse(v, out w);
-        if (x)
+        if (x != false) // x==true
         {
             Console.WriteLine("Успех. Значение = " + w);
         }
@@ -100,6 +127,29 @@ class Program
         {
             Console.WriteLine("Неудача");
         }
-      
+        // И ИЛИ НЕ - И && ИЛИ ||  отрицание != сравнение ==
+        // w > 100 || w<-100
+        // w!=100
+        if (w > 100 && w < 200)
+        { }
+        //генератор случайных чиел
+        Random rand = new Random();
+        int chisli = rand.Next(1, 100);
+    }
+    static int calcAdd(int a, int b)
+    {
+        int res = a + b;
+        return res;
+    }
+    static int calcMultiply(int a, int b)
+    {
+        int res = a * b;
+        return res;
+    }
+    static float calcDiff(int a, int b)
+    {
+        //надо преобразовать а во float потому что иначе деление целочисленное
+        float res = (float)a / b;
+        return res;
     }
 }
