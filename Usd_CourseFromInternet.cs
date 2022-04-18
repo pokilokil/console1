@@ -44,43 +44,102 @@ namespace Lesson2
             int positionValue = line.IndexOf("Value", posUSD);
             int posBeginCourse = positionValue + 6;
             string course = line.Substring(posBeginCourse, 7);
-            double cource = Convert.ToDouble(course);
+            double courceUSD = Convert.ToDouble(course);
+
+
+            int posEU = line.IndexOf("EUR");//ищем USD
+            int positionValueEU = line.IndexOf("Value", posEU);
+            int posBeginCourseEU = positionValueEU + 6;
+            string courseEU = line.Substring(posBeginCourseEU, 7);
+            double courceEU = Convert.ToDouble(courseEU);
+
 
             //for (int i = 0; i < line.Length; i++)
             //{
             //    if line[i]=='$'
             //}
 
-            //XmlDocument doc = new XmlDocument();
 
-            //doc.LoadXml(line);
-
+            string a = "";
+            for (int i = 0; i < 15; i++)
+            {
+                a = a + i.ToString() + " ";//вот это работает медленно
+            }
+            //быстро работающий прибавлятор строк
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 15; i++)
+            {
+                sb.Append(i.ToString());
+                sb.Append(" ");
+            }
+            string res = sb.ToString();
 
 
             //Для переезда в Америку мне нужно 25000 долларов
-            double migration = 25000;
+            double migrationUSD = 25000;
+            double migrationEU = 32000;
 
             //Введенная сумма пользователем
             double money;
 
-            Console.WriteLine("Для переезда в Америку вам нужно 25000. Введите сколько у вас денег в рублях для того, чтобы узнать, хватит ли вам ресурсов");
-            Console.WriteLine("Нынешний курс доллара составляет " + cource + " рублей");
+            int choice;
 
-            money = double.Parse(Console.ReadLine());
 
-            if ((money * cource) > (migration * cource))
+            Console.WriteLine("Мы предлагаем вам калькулятор, способный высчитать в нужной вам валюте возможность переезда в Америку или Германию.");
+            Console.WriteLine("Нынешний курс доллара составляет " + courceUSD + " рублей, а курс Евро составляет " + courceEU + "рублей.");
+            Console.WriteLine("Если вы хотите переехать в Америку - введите цифру 1 и нажмите Enter. Если вы хотите переехать в Германию - введите цифру 2 и нажмите Enter.");
+            choice = int.Parse(Console.ReadLine());
+            //Как остановить while?
+            while ((choice != 1) || (choice != 2))
             {
-                Console.WriteLine("Ваших ресурсов хватает на переезд");
-                Console.ReadLine();
-            }
 
-            else
-            {
-                Console.WriteLine("Копите деньги. Вашего финанса не хватит на комфортную жизнь в Америке");
-                Console.WriteLine("Для комфортной жизни в Америке вам нужно " + (cource * migration) + " рублей");
-                Console.ReadLine();
-            }
+           
+                if (choice == 1)
+                {
+                    Console.WriteLine("Введите сумму ваших денег в рублёвом эквиваленте и нажмите enter");
+                    money = double.Parse(Console.ReadLine());
 
+                    if ((money / courceUSD) > (migrationUSD * courceUSD))
+                    {
+                        Console.WriteLine("Ваших ресурсов хватает на переезд в Америку");
+                        Console.ReadLine();
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("Копите деньги. Вашего финанса не хватит на комфортную жизнь в Америке");
+                        Console.WriteLine("Для комфортной жизни в Америке вам нужно " + (courceUSD * migrationUSD) + " рублей");
+                        Console.ReadLine();
+                        Console.WriteLine("Спасибо за использование нашего калькулятора");
+                    }
+                }
+                if (choice == 2)
+                {
+                    Console.WriteLine("Введите сумму ваших денег в рублёвом эквиваленте и нажмите enter");
+                    money = double.Parse(Console.ReadLine());
+
+                if ((money / courceEU) > (migrationEU * courceEU))
+                {
+                    Console.WriteLine("Ваших ресурсов хватает на переезд в Германию");
+                    Console.ReadLine();
+                }
+
+                else
+                {
+                    Console.WriteLine("Копите деньги. Вашего финанса не хватит на комфортную жизнь в Германии");
+                    Console.WriteLine("Для комфортной жизни в Германии вам нужно " + (courceEU * migrationEU) + " рублей");
+                    Console.ReadLine();
+                    Console.WriteLine("Спасибо за использование нашего калькулятора");
+                }
+
+                }
+                if ((choice != 1) || (choice != 2)) 
+                {
+                    Console.WriteLine("Введите правильное число");
+                    choice = int.Parse(Console.ReadLine());
+                
+                }
+            }
         }
     }
 }
