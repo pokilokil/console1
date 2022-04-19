@@ -47,7 +47,7 @@ namespace Lesson2
             double courceUSD = Convert.ToDouble(course);
 
 
-            int posEU = line.IndexOf("EUR");//ищем USD
+            int posEU = line.IndexOf("EUR");//ищем EU
             int positionValueEU = line.IndexOf("Value", posEU);
             int posBeginCourseEU = positionValueEU + 6;
             string courseEU = line.Substring(posBeginCourseEU, 7);
@@ -87,10 +87,10 @@ namespace Lesson2
 
             Console.WriteLine("Мы предлагаем вам калькулятор, способный высчитать в нужной вам валюте возможность переезда в Америку или Германию.");
             Console.WriteLine("Нынешний курс доллара составляет " + courceUSD + " рублей, а курс Евро составляет " + courceEU + "рублей.");
-            Console.WriteLine("Если вы хотите переехать в Америку - введите цифру 1 и нажмите Enter. Если вы хотите переехать в Германию - введите цифру 2 и нажмите Enter.");
+            Console.WriteLine("Если вы хотите переехать в Америку - введите цифру 1 и нажмите Enter. Если вы хотите переехать в Германию - введите цифру 2 и нажмите Enter. Введите 3 для выхода");
             choice = int.Parse(Console.ReadLine());
             //Как остановить while?
-            while ((choice != 1) || (choice != 2))
+            while ( choice != 3 )
             {
 
            
